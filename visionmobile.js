@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             messageBox.classList.remove("hidden");
 
-            const phoneNumber = "254726908190";
+            const phoneNumber = "16785982974";
 
             const message = `Booking Request:
 
@@ -101,6 +101,7 @@ Notes: ${data.notes}`;
 
     menuBtn.addEventListener("click", () => {
         mobileMenu.classList.remove("hidden");
+        menuBtn.classList.add("hidden")
     });
 
     closeMenu.addEventListener("click", () => {
@@ -111,6 +112,8 @@ Notes: ${data.notes}`;
 
         link.addEventListener("click", () => {
             mobileMenu.classList.add("hidden");
+            menuBtn.classList.remove("hidden");
+            
         });
 
     });
