@@ -1,22 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById('bookingForm');
-    form.addEventListener("submit", function (e) {
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("bookingForm");
+    const messageBox = document.getElementById("formMessage");
+
+    form.addEventListener("submit", (e) => {
+
         e.preventDefault();
-        const fields= form.querySelectorAll("input, select");
-        let isValid = true;
+
+        const fields = form.querySelectorAll("input, select");
+        let firstInvalidField = null;
+
         fields.forEach(field => {
+
             field.classList.remove("border-red-500");
-            if(field.hasAttribute("required")&& !field.value.trim()){
+
+            if (field.hasAttribute("required") && !field.value.trim()) {
+
                 field.classList.add("border-red-500");
-                isValid = false
+
+                if (!firstInvalidField) {
+                    firstInvalidField = field;
+                }
+
             }
+
         });
-        if(!isValid){
-            alert('Please fill all required fields correctly');
-            form.querySelector(".border-red-500").focus();
+
+        if (firstInvalidField) {
+
+            messageBox.textContent = "Please fill all required fields correctly.";
+
+            messageBox.className =
+                "mb-4 text-center p-4 rounded-xl text-white bg-red-500";
+
+            messageBox.classList.remove("hidden");
+
+            firstInvalidField.focus();
+
             return;
         }
+
         const formData = new FormData(form);
+
         const data = {
             serviceType: formData.get("serviceType"),
             date: formData.get("date"),
@@ -25,70 +50,69 @@ document.addEventListener("DOMContentLoaded", function () {
             dropoff: formData.get("dropoff"),
             name: formData.get("name"),
             phone: formData.get("phone"),
-            notes: formData.get("notes"),
+            notes: formData.get("notes")
         };
-        if(
-        !data.date ||
-        !data.time ||
-        !data.pickup ||
-        !data.dropoff ||
-        !data.name ||
-        !data.phone 
-        ){
-            alert("Please fill all required fields.");
-            return;
-        }
+
         const button = form.querySelector("button");
-        button.textContent="Submitting...";
-        button.disabled=true;
-        const messageBox= document.getElementById("formMessage");
-        function showMessage(text, type="success"){
-            messageBox.textContet=text;
-            messageBox.className = 'p-3 rounded-lg text-white ${type=== "success" ? "bg-green-500" : "bg-red-500"}';
+
+        button.textContent = "Submitting...";
+        button.disabled = true;
+
+        setTimeout(() => {
+
+            messageBox.textContent =
+                "Booking submitted successfully!";
+
+            messageBox.className =
+                "mb-4 text-center p-4 rounded-xl text-white bg-green-500";
+
             messageBox.classList.remove("hidden");
-        } 
-        setTimeout(()=>{
-         console.log(data);
-        
-            showMessage("Booking submitted successfully!");
+
+            const phoneNumber = "254726908190";
+
+            const message = `Booking Request:
+
+Name: ${data.name}
+Phone: ${data.phone}
+Service: ${data.serviceType}
+Date: ${data.date}
+Time: ${data.time}
+Pickup: ${data.pickup}
+Dropoff: ${data.dropoff}
+Notes: ${data.notes}`;
+
+            const url =
+                `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            window.open(url, "_blank");
+
             form.reset();
 
-            button.textContent="Confirm Booking";
-            button.disabled=false;
-        }, 2000);
+            button.textContent = "Confirm Booking";
+            button.disabled = false;
+
+        }, 1500);
+
     });
 
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
-    const authButtons = document.getElementById("authButtons");
     const closeMenu = document.getElementById("closeMenu");
+
     menuBtn.addEventListener("click", () => {
         mobileMenu.classList.remove("hidden");
     });
+
     closeMenu.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
     });
-    
 
     document.querySelectorAll("#mobileMenu a").forEach(link => {
+
         link.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
+            mobileMenu.classList.add("hidden");
         });
-    }); 
-    const phoneNumber = "254726908190";
 
-    const message = `Booking Request:
-    Name: ${data.name}
-    Phone: ${data.phone}
-    Service: ${data.serviceType}
-    Date: ${data.date}
-    Time: ${data.time}
-    Pickup: ${data.pickup}
-    Dropoff: ${data.dropoff}
-    Notes: ${data.notes}`;
+    });
 
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
 });
-
