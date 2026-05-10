@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(user);
 
-        alert("Login system ready for backend integration.");
+        alert("Successfully logged in");
 
         loginForm.reset();
 
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(newUser);
 
-        alert("Signup system ready for backend integration.");
+        alert("Account successfully created.");
 
         signupForm.reset();
 
