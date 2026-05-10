@@ -1,0 +1,21 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-area-card:hover,
+.testimonial-card:hover,
+.faq-card:hover {
+    transform: translateY(-6px);
+    transition: 0.3s ease;
+}
