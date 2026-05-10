@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (firstInvalidField) {
 
-            messageBox.textContent = "Please fill all required fields correctly.";
+            messageBox.textContent =
+                "Please fill all required fields correctly.";
 
             messageBox.className =
                 "mb-4 text-center p-4 rounded-xl text-white bg-red-500";
@@ -100,21 +101,87 @@ Notes: ${data.notes}`;
     const closeMenu = document.getElementById("closeMenu");
 
     menuBtn.addEventListener("click", () => {
+
         mobileMenu.classList.remove("hidden");
-        menuBtn.classList.add("hidden")
+
+        menuBtn.classList.add("hidden");
+
     });
 
     closeMenu.addEventListener("click", () => {
+
         mobileMenu.classList.add("hidden");
+
+        menuBtn.classList.remove("hidden");
+
     });
 
     document.querySelectorAll("#mobileMenu a").forEach(link => {
 
         link.addEventListener("click", () => {
+
             mobileMenu.classList.add("hidden");
+
             menuBtn.classList.remove("hidden");
-            
+
         });
+
+    });
+
+    const loginModal = document.getElementById("loginModal");
+
+    const desktopLoginBtn =
+        document.getElementById("desktopLoginBtn");
+
+    const mobileLoginBtn =
+        document.getElementById("mobileLoginBtn");
+
+    const closeLoginModal =
+        document.getElementById("closeLoginModal");
+
+    function openLoginModal() {
+
+        loginModal.classList.remove("hidden");
+
+        mobileMenu.classList.add("hidden");
+
+        menuBtn.classList.remove("hidden");
+
+    }
+
+    desktopLoginBtn.addEventListener("click", openLoginModal);
+
+    mobileLoginBtn.addEventListener("click", openLoginModal);
+
+    closeLoginModal.addEventListener("click", () => {
+
+        loginModal.classList.add("hidden");
+
+    });
+
+    const loginForm = document.getElementById("loginForm");
+
+    loginForm.addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        const loginData = new FormData(loginForm);
+
+        const user = {
+
+            email: loginData.get("email"),
+
+            password: loginData.get("password")
+
+        };
+
+        console.log(user);
+
+        alert("Login system ready for backend integration.");
+
+        loginForm.reset();
+
+        loginModal.classList.add("hidden");
 
     });
 
