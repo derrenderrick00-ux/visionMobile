@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
     const closeMenu = document.getElementById("closeMenu");
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    
     const loginModal = document.getElementById("loginModal");
     const signupModal = document.getElementById("signupModal");
     const desktopLoginBtn = document.getElementById("desktopLoginBtn");
@@ -55,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
         signupModal.classList.add("hidden");
     });
 
-    
     loginModal.addEventListener("click", (e) => {
         if (e.target === loginModal) {
             loginModal.classList.add("hidden");
@@ -68,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
     const loginForm = document.getElementById("loginForm");
 
     loginForm.addEventListener("submit", async (e) => {
@@ -81,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const res = await fetch("https fetch("https://vision-mobility-api-production.up.railway.app/api/auth/login", {
+            const res = await fetch("https://vision-mobility-api-production.up.railway.app/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
@@ -125,11 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
     const form = document.getElementById("bookingForm");
     const messageBox = document.getElementById("formMessage");
 
-    
     function isValidPhone(value) {
         return /^[\+]?[\d\s\-\(\)]{7,15}$/.test(value.trim());
     }
@@ -211,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
