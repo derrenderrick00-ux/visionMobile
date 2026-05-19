@@ -80,23 +80,23 @@ document.addEventListener("DOMContentLoaded", () => {
             password: loginData.get("password")
         };
 
-        // TODO: Replace with real API call when backend is ready
-        // const res = await fetch("/api/auth/login", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(user)
-        // });
-        // const data = await res.json();
-        // if (!res.ok) { alert(data.message); return; }
-        // localStorage.setItem("token", data.token);
-
-        console.log("Login payload:", user);
-        alert("Successfully logged in");
-        loginForm.reset();
-        loginModal.classList.add("hidden");
+        try {
+            const res = await fetch("https fetch("https://vision-mobility-api-production.up.railway.app/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(user)
+            });
+            const data = await res.json();
+            if (!res.ok) { alert(data.message); return; }
+            localStorage.setItem("token", data.token);
+            alert("Successfully logged in");
+            loginForm.reset();
+            loginModal.classList.add("hidden");
+        } catch (err) {
+            alert("Login failed. Please try again.");
+        }
     });
 
-    // ─── Signup Form ───────────────────────────────────────────────
     const signupForm = document.getElementById("signupForm");
 
     signupForm.addEventListener("submit", async (e) => {
@@ -109,19 +109,20 @@ document.addEventListener("DOMContentLoaded", () => {
             password: signupData.get("password")
         };
 
-        // TODO: Replace with real API call when backend is ready
-        // const res = await fetch("/api/auth/register", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(newUser)
-        // });
-        // const data = await res.json();
-        // if (!res.ok) { alert(data.message); return; }
-
-        console.log("Signup payload:", newUser);
-        alert("Account successfully created.");
-        signupForm.reset();
-        signupModal.classList.add("hidden");
+        try {
+            const res = await fetch("https://vision-mobility-api-production.up.railway.app/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newUser)
+            });
+            const data = await res.json();
+            if (!res.ok) { alert(data.message); return; }
+            alert("Account successfully created.");
+            signupForm.reset();
+            signupModal.classList.add("hidden");
+        } catch (err) {
+            alert("Signup failed. Please try again.");
+        }
     });
 
     
@@ -136,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // FIX: include textarea in validation loop
         const fields = form.querySelectorAll("input, select, textarea");
         let firstInvalidField = null;
         let hasError = false;
@@ -150,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!firstInvalidField) firstInvalidField = field;
             }
 
-            // FIX: validate phone format specifically
             if (field.name === "phone" && field.value.trim() && !isValidPhone(field.value)) {
                 field.classList.add("border-red-500");
                 hasError = true;
@@ -182,25 +181,15 @@ document.addEventListener("DOMContentLoaded", () => {
         button.textContent = "Submitting...";
         button.disabled = true;
 
-        // TODO: Swap this block out for the real API call when backend is ready
-        // try {
-        //     const res = await fetch("/api/bookings", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(data)
-        //     });
-        //     const result = await res.json();
-        //     if (!res.ok) throw new Error(result.message);
-        // } catch (err) {
-        //     messageBox.textContent = "Booking failed. Please try again.";
-        //     messageBox.className = "mb-4 text-center p-4 rounded-xl text-white bg-red-500";
-        //     messageBox.classList.remove("hidden");
-        //     button.textContent = "Confirm Booking";
-        //     button.disabled = false;
-        //     return;
-        // }
+        try {
+            const res = await fetch("https://vision-mobility-api-production.up.railway.app/api/bookings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (!res.ok) throw new Error(result.message);
 
-        setTimeout(() => {
             messageBox.textContent = "Booking submitted successfully!";
             messageBox.className = "mb-4 text-center p-4 rounded-xl text-white bg-green-500";
             messageBox.classList.remove("hidden");
@@ -212,9 +201,14 @@ document.addEventListener("DOMContentLoaded", () => {
             window.open(url, "_blank");
 
             form.reset();
+        } catch (err) {
+            messageBox.textContent = "Booking failed. Please try again.";
+            messageBox.className = "mb-4 text-center p-4 rounded-xl text-white bg-red-500";
+            messageBox.classList.remove("hidden");
+        } finally {
             button.textContent = "Confirm Booking";
             button.disabled = false;
-        }, 1500);
+        }
     });
 
     
