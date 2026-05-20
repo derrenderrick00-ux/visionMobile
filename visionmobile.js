@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const loginModal     = document.getElementById("loginModal");
-    const signupModal    = document.getElementById("signupModal");
+    const loginModal       = document.getElementById("loginModal");
+    const signupModal      = document.getElementById("signupModal");
     const desktopLoginBtn  = document.getElementById("desktopLoginBtn");
     const mobileLoginBtn   = document.getElementById("mobileLoginBtn");
     const closeLoginModal  = document.getElementById("closeLoginModal");
@@ -118,8 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             content.innerHTML = data.bookings.map(b => {
-                const style   = STATUS_STYLES[b.status] || STATUS_STYLES.pending;
-                const label   = b.status.charAt(0).toUpperCase() + b.status.slice(1);
+                const style    = STATUS_STYLES[b.status] || STATUS_STYLES.pending;
+                const label    = b.status.charAt(0).toUpperCase() + b.status.slice(1);
                 const bookedOn = new Date(b.createdAt).toLocaleDateString("en-US", {
                     year: "numeric", month: "short", day: "numeric"
                 });
@@ -150,82 +150,96 @@ document.addEventListener("DOMContentLoaded", () => {
     function setLoggedInUI(user) {
         const firstName = user.fullname ? user.fullname.split(" ")[0] : "User";
 
-        const desktopDropdownWrapper = document.createElement("div");
-        desktopDropdownWrapper.id = "desktopUserMenu";
-        desktopDropdownWrapper.className = "relative";
-        desktopDropdownWrapper.innerHTML = `
-            <button id="desktopUserBtn" class="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 transition text-sm font-semibold">
-                <span>Welcome, ${firstName}</span>
-                <span class="text-xs">▾</span>
-            </button>
-            <div id="desktopDropdown" class="hidden absolute right-0 mt-2 w-44 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50">
-                <button id="desktopMyBookings" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 font-medium">My Bookings</button>
-                <button id="desktopLogout" class="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-medium border-t border-gray-100">Logout</button>
-            </div>
-        `;
+        const existingDesktop = document.getElementById("desktopLoginBtn") || document.getElementById("desktopUserMenu");
+        if (existingDesktop) {
+            const wrapper = document.createElement("div");
+            wrapper.id = "desktopUserMenu";
+            wrapper.className = "relative";
+            wrapper.innerHTML = `
+                <button id="desktopUserBtn" class="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 transition text-sm font-semibold">
+                    <span>Welcome, ${firstName}</span>
+                    <span class="text-xs">▾</span>
+                </button>
+                <div id="desktopDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50">
+                    <button id="desktopMyBookings" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 font-medium">My Bookings</button>
+                    <button id="desktopLogout" class="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-medium border-t border-gray-100">Logout</button>
+                </div>
+            `;
+            existingDesktop.replaceWith(wrapper);
 
-        desktopLoginBtn.replaceWith(desktopDropdownWrapper);
+            document.getElementById("desktopUserBtn").addEventListener("click", (e) => {
+                e.stopPropagation();
+                document.getElementById("desktopDropdown").classList.toggle("hidden");
+            });
+            document.getElementById("desktopMyBookings").addEventListener("click", () => {
+                document.getElementById("desktopDropdown").classList.add("hidden");
+                openMyBookings();
+            });
+            document.getElementById("desktopLogout").addEventListener("click", logout);
+            document.addEventListener("click", () => {
+                const dd = document.getElementById("desktopDropdown");
+                if (dd) dd.classList.add("hidden");
+            });
+        }
 
-        document.getElementById("desktopUserBtn").addEventListener("click", (e) => {
-            e.stopPropagation();
-            document.getElementById("desktopDropdown").classList.toggle("hidden");
-        });
+        const existingMobile = document.getElementById("mobileLoginBtn") || document.getElementById("mobileWelcome");
+        if (existingMobile) {
+            const welcomeEl = document.createElement("p");
+            welcomeEl.id = "mobileWelcome";
+            welcomeEl.className = "text-teal-600 font-semibold text-2xl";
+            welcomeEl.textContent = `Welcome, ${firstName}`;
+            existingMobile.replaceWith(welcomeEl);
+        }
 
-        document.getElementById("desktopMyBookings").addEventListener("click", () => {
-            document.getElementById("desktopDropdown").classList.add("hidden");
-            openMyBookings();
-        });
+        const existingMyBtn = document.getElementById("mobileMyBookingsBtn");
+        if (!existingMyBtn) {
+            const myBookingsBtn = document.createElement("button");
+            myBookingsBtn.id = "mobileMyBookingsBtn";
+            myBookingsBtn.className = "text-left text-2xl font-semibold text-gray-700 w-full";
+            myBookingsBtn.textContent = "My Bookings";
+            myBookingsBtn.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                menuBtn.classList.remove("hidden");
+                openMyBookings();
+            });
 
-        document.getElementById("desktopLogout").addEventListener("click", () => {
-            logout();
-        });
+            const logoutBtn = document.createElement("button");
+            logoutBtn.id = "mobileLogoutBtn";
+            logoutBtn.className = "bg-red-500 text-white py-4 rounded-2xl text-xl w-full";
+            logoutBtn.textContent = "Logout";
+            logoutBtn.addEventListener("click", logout);
 
-        document.addEventListener("click", () => {
-            const dd = document.getElementById("desktopDropdown");
-            if (dd) dd.classList.add("hidden");
-        });
-
-        const mobileUserSection = document.createElement("div");
-        mobileUserSection.id = "mobileUserSection";
-        mobileUserSection.innerHTML = `
-            <p class="text-teal-600 font-semibold text-lg">Welcome, ${firstName}</p>
-            <button id="mobileMyBookings" class="w-full text-left text-2xl font-semibold text-gray-700">My Bookings</button>
-            <button id="mobileLogout" class="bg-red-500 text-white py-4 rounded-2xl text-xl w-full">Logout</button>
-        `;
-
-        mobileLoginBtn.replaceWith(mobileUserSection);
-
-        document.getElementById("mobileMyBookings").addEventListener("click", () => {
-            mobileMenu.classList.add("hidden");
-            menuBtn.classList.remove("hidden");
-            openMyBookings();
-        });
-
-        document.getElementById("mobileLogout").addEventListener("click", () => {
-            logout();
-        });
+            const mobileMenuInner = mobileMenu.querySelector(".flex.flex-col");
+            mobileMenuInner.appendChild(myBookingsBtn);
+            mobileMenuInner.appendChild(logoutBtn);
+        }
     }
 
     function setLoggedOutUI() {
         const desktopMenu = document.getElementById("desktopUserMenu");
         if (desktopMenu) {
-            const newBtn = document.createElement("button");
-            newBtn.id = "desktopLoginBtn";
-            newBtn.className = "bg-teal-600 text-white px-5 py-2 rounded-xl hover:bg-teal-700 transition";
-            newBtn.textContent = "Login";
-            newBtn.addEventListener("click", openLoginModal);
-            desktopMenu.replaceWith(newBtn);
+            const btn = document.createElement("button");
+            btn.id = "desktopLoginBtn";
+            btn.className = "bg-teal-600 text-white px-5 py-2 rounded-xl hover:bg-teal-700 transition";
+            btn.textContent = "Login";
+            btn.addEventListener("click", openLoginModal);
+            desktopMenu.replaceWith(btn);
         }
 
-        const mobileSection = document.getElementById("mobileUserSection");
-        if (mobileSection) {
-            const newBtn = document.createElement("button");
-            newBtn.id = "mobileLoginBtn";
-            newBtn.className = "bg-teal-600 text-white py-4 rounded-2xl text-xl w-full";
-            newBtn.textContent = "Login";
-            newBtn.addEventListener("click", openLoginModal);
-            mobileSection.replaceWith(newBtn);
+        const mobileWelcome = document.getElementById("mobileWelcome");
+        if (mobileWelcome) {
+            const btn = document.createElement("button");
+            btn.id = "mobileLoginBtn";
+            btn.className = "bg-teal-600 text-white py-4 rounded-2xl text-xl w-full";
+            btn.textContent = "Login";
+            btn.addEventListener("click", openLoginModal);
+            mobileWelcome.replaceWith(btn);
         }
+
+        const myBtn  = document.getElementById("mobileMyBookingsBtn");
+        const logBtn = document.getElementById("mobileLogoutBtn");
+        if (myBtn)  myBtn.remove();
+        if (logBtn) logBtn.remove();
     }
 
     function logout() {
@@ -240,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!token) return;
 
         try {
-            const res  = await fetch(`${API}/api/auth/me`, {
+            const res = await fetch(`${API}/api/auth/me`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
 
