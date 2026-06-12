@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     checkAuthState();
 
-    // Login Form
+        // Login Form
     const loginForm = document.getElementById("loginForm");
 
     loginForm.addEventListener("submit", async (e) => {
@@ -407,9 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showMessage(text, isSuccess) {
         messageBox.textContent = text;
-        messageBox.className = `mb-4 text-center p-4 rounded-xl text-white font-medium ${
-            isSuccess ? "bg-green-500" : "bg-red-500"
-        }`;
+        messageBox.className = `mb-4 text-center p-4 rounded-xl text-white font-medium ${isSuccess ? "bg-green-500" : "bg-red-500"}`;
         messageBox.classList.remove("hidden");
         messageBox.scrollIntoView({ behavior: "smooth", block: "center" });
     }
@@ -481,4 +479,14 @@ document.addEventListener("DOMContentLoaded", () => {
             form.reset();
 
         } catch {
- 
+            showMessage("Network error. Please check your connection and try again.", false);
+        } finally {
+            button.textContent = originalText;
+            button.disabled = false;
+        }
+    });
+
+});
+
+                
+    
