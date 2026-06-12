@@ -2,6 +2,25 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0d9488;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+}
+
+/* Fade up animation */
 .fade-up {
     opacity: 0;
     transform: translateY(40px);
@@ -13,9 +32,141 @@ html {
     transform: translateY(0);
 }
 
-.service-area-card:hover,
-.testimonial-card:hover,
-.faq-card:hover {
+/* Service cards (competitor-style hover) */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Area cards */
+.service-area-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-area-card:hover {
     transform: translateY(-6px);
-    transition: 0.3s ease;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Testimonial cards */
+.testimonial-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* FAQ cards */
+.faq-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.faq-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: #0d9488;
+}
+
+/* My Bookings modal styling */
+#myBookingsModal .bg-white {
+    border: 1px solid #e5e7eb;
+}
+
+#myBookingsModal h2 {
+    color: #0d9488;
+    border-bottom: 2px solid #f0fdfa;
+    padding-bottom: 0.75rem;
+}
+
+/* My Bookings button styling */
+#desktopMyBookings {
+    color: #0d9488;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#desktopMyBookings:hover {
+    background-color: #f0fdfa;
+    color: #0f766e;
+}
+
+#mobileMyBookingsBtn {
+    color: #0d9488;
+    transition: all 0.2s ease;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+#mobileMyBookingsBtn:hover {
+    color: #0f766e;
+    padding-left: 0.5rem;
+}
+
+/* Sticky call button animation */
+@keyframes bounce-slow {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+}
+
+/* Mobile welcome header */
+#mobileWelcomeHeader {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Form focus states */
+input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+/* Button hover lift */
+button[type="submit"]:hover {
+    transform: translateY(-1px);
+}
+
+/* Modal backdrop blur */
+#loginModal, #signupModal, #myBookingsModal {
+    backdrop-filter: blur(4px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .service-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    #stickyCallBtn {
+        box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+    }
+}
+
+/* Print styles */
+@media print {
+    header, footer, #stickyCallBtn {
+        display: none;
+    }
 }
