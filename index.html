@@ -238,8 +238,8 @@
         </div>
     </section>
 
-    <!-- Booking Section -->
-    <section id="booking" class="py-20 bg-gray-100 fade-up">
+        <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-gray-100">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-800">Book Your Service</h2>
@@ -248,7 +248,7 @@
             </div>
             <div id="formMessage" class="hidden mb-4 text-center p-4 rounded-xl text-white"></div>
             <form id="bookingForm" novalidate class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
-                <select name="serviceType" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <select name="serviceType" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                     <option value="">Select Service Type</option>
                     <option>Wheelchair Transport</option>
                     <option>Mobility Scooter</option>
@@ -256,11 +256,149 @@
                     <option>Power Wheelchair</option>
                 </select>
                 <div class="grid md:grid-cols-2 gap-4">
-                    <input type="date" name="date" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
-                    <input type="time" name="time" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                    <input type="date" name="date" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <input type="time" name="time" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                 </div>
-                <input type="text" name="pickup" placeholder="Pickup Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
-                <input type="text" name="dropoff" placeholder="Drop-off Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
-                <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
-                <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
-                <textarea name="notes" placeholder="Additional Notes (optional)" class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition h-2
+                <input type="text" name="pickup" placeholder="Pickup Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <input type="text" name="dropoff" placeholder="Drop-off Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <textarea name="notes" placeholder="Additional Notes (optional)" class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 h-24 resize-none"></textarea>
+                <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-teal-700 transition">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">What Clients Say</h2>
+            <p class="text-center text-gray-600 mb-14">Rated 4.9/5 from 200+ reviews</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"Professional and caring service. The driver was patient and helped my mother into the vehicle with such kindness. Highly recommend!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-teal-200 rounded-full flex items-center justify-center text-teal-700 font-bold">S</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Sarah M.</h4>
+                            <p class="text-sm text-gray-500">Wheelchair Transport</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"Excellent communication throughout. I received a text when the driver was en route and another when they arrived. Very reliable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-amber-200 rounded-full flex items-center justify-center text-amber-700 font-bold">J</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">James R.</h4>
+                            <p class="text-sm text-gray-500">Mobility Scooter Rental</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                    <p class="text-gray-600 mb-6 italic">"Reliable and compassionate staff. They know all the hospital drop-off procedures at Swedish Medical Center. Made our appointment stress-free."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-200 rounded-full flex items-center justify-center text-emerald-700 font-bold">E</div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Emily T.</h4>
+                            <p class="text-sm text-gray-500">Electric Wheelchair</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- FAQ Section (10 Questions) -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">Frequently Asked Questions</h2>
+            <p class="text-center text-gray-600 mb-14">Everything you need to know about our services</p>
+            <div class="space-y-4">
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">How do I schedule a ride?</h3>
+                    <p class="text-gray-600">You can schedule directly through our online booking form on this page, or call us at +1 (678) 598-2974. Most bookings are confirmed within 15 minutes during business hours.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Are vehicles wheelchair accessible?</h3>
+                    <p class="text-gray-600">Yes, all transportation vehicles are fully ADA compliant with wheelchair lifts, securement straps, and ample interior space for all wheelchair types including power chairs.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">What is your cancellation policy?</h3>
+                    <p class="text-gray-600">Cancellations made 24 hours or more in advance receive a full refund. Same-day cancellations may incur a $25 fee. No-shows are charged the full ride amount.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Can a family member or caregiver ride along?</h3>
+                    <p class="text-gray-600">Absolutely. One companion rides free with each passenger. Additional companions may ride for a small fee depending on vehicle capacity. Please mention this when booking.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Do you accept insurance or Medicare?</h3>
+                    <p class="text-gray-600">We work with most major insurance providers and can provide documentation for Medicare reimbursement. Contact us with your insurance details for verification.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">What are your typical wait times?</h3>
+                    <p class="text-gray-600">Pre-scheduled rides have zero wait time—we arrive at your requested time. For same-day bookings, we typically arrive within 45-90 minutes depending on your location and traffic.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Are your drivers trained for medical transport?</h3>
+                    <p class="text-gray-600">All drivers undergo background checks, CPR certification, sensitivity training for passengers with disabilities, and defensive driving courses. Many have EMT or CNA backgrounds.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Do you accommodate service animals?</h3>
+                    <p class="text-gray-600">Yes, service animals are always welcome at no additional charge per ADA regulations. Please inform us when booking so we can prepare the appropriate vehicle space.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">What payment methods do you accept?</h3>
+                    <p class="text-gray-600">We accept all major credit cards, debit cards, cash, and most HSA/FSA cards. Payment is processed securely after your ride is completed or at equipment pickup.</p>
+                </div>
+                <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Do you offer equipment delivery?</h3>
+                    <p class="text-gray-600">Yes, we deliver mobility scooters and wheelchairs directly to your home, hospital, or hotel. Setup and basic training on equipment use is included with every delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Contact Us</h2>
+            <p class="text-gray-600 mb-8 text-lg">Available 24/7 for your mobility needs</p>
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-3xl mb-3">📞</div>
+                    <p class="text-gray-600 font-semibold">+1 (678) 598-2974</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-3xl mb-3">✉️</div>
+                    <p class="text-gray-600 font-semibold">visionmobility@gmail.com</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="text-3xl mb-3">🕐</div>
+                    <p class="text-gray-600 font-semibold">Available 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold mb-4">Vision Mobility</h3>
+            <p class="text-gray-400 mb-8 max-w-md mx-auto">Compassionate and reliable mobility transportation services across Seattle, Tacoma, and Bellevue.</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white transition">Accessibility</a>
+            </div>
+            <p class="text-gray-500">©2026 Vision Mobility. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="visionmobile.js"></script>
+</body>
+</html>
+
+    
