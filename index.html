@@ -2,665 +2,265 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Vision Mobility | Accessible Transportation Services</title>
-
-    <meta
-        name="description"
-        content="Accessible mobility transportation services including wheelchair transport, scooter rentals, and mobility assistance.">
-
+    <meta name="description" content="Accessible mobility transportation services including wheelchair transport, scooter rentals, and mobility assistance.">
     <link rel="icon" type="image/png" href="./favicon.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="stylesheet" href="visionmobile.css">
-
 </head>
 
 <body class="bg-white">
 
+    <!-- Sticky Call Button (Mobile Only) -->
+    <a href="tel:+16785982974" id="stickyCallBtn" class="md:hidden fixed bottom-6 right-6 z-[4000] bg-amber-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:bg-amber-600 transition animate-bounce-slow">
+        📞
+    </a>
+
     <header class="bg-white shadow-md fixed w-full top-0 z-[1000]">
-
         <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-
             <div class="flex items-center space-x-3">
+                <img src="./logo.jpg" alt="Vision Mobility Logo" class="h-10 w-auto">
+                <span class="text-lg font-bold text-teal-600 hidden sm:block">Vision Mobility</span>
+            </div>
 
-                <img src="./logo.jpg" alt="Logo" class="h-10 w-auto">
-
-                <span class="text-lg font-bold text-teal-600 hidden sm:block">
-                    Vision Mobility
-                </span>
-
+            <!-- Mobile Welcome Message (between logo and hamburger) -->
+            <div id="mobileHeaderArea" class="md:hidden flex items-center gap-3">
+                <span id="mobileWelcomeHeader" class="hidden text-teal-600 font-semibold text-sm"></span>
             </div>
 
             <nav class="hidden md:flex items-center space-x-8 font-medium">
-
-                <a href="#">Home</a>
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#coverage">Coverage</a>
-                <a href="#booking">Book</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact</a>
-
-                <button
-                    id="desktopLoginBtn"
-                    class="bg-teal-600 text-white px-5 py-2 rounded-xl hover:bg-teal-700 transition">
-
-                    Login
-
-                </button>
-
+                <a href="#" class="hover:text-teal-600 transition">Home</a>
+                <a href="#about" class="hover:text-teal-600 transition">About</a>
+                <a href="#services" class="hover:text-teal-600 transition">Services</a>
+                <a href="#coverage" class="hover:text-teal-600 transition">Coverage</a>
+                <a href="#booking" class="hover:text-teal-600 transition">Book</a>
+                <a href="#faq" class="hover:text-teal-600 transition">FAQ</a>
+                <a href="#contact" class="hover:text-teal-600 transition">Contact</a>
+                <button id="desktopLoginBtn" class="bg-teal-600 text-white px-5 py-2 rounded-xl hover:bg-teal-700 transition">Login</button>
             </nav>
 
-            <button
-                id="menuBtn"
-                class="md:hidden text-4xl font-bold text-gray-800">
-
-                ☰
-
-            </button>
-
+            <button id="menuBtn" class="md:hidden text-3xl font-bold text-gray-800">☰</button>
         </div>
-
     </header>
 
-    <nav
-        id="mobileMenu"
-        class="hidden fixed inset-0 bg-white z-[2000] md:hidden">
-
+    <nav id="mobileMenu" class="hidden fixed inset-0 bg-white z-[2000] md:hidden">
         <div class="flex items-center justify-between p-4 border-b">
-
             <div class="flex items-center space-x-3">
-
                 <img src="./logo.jpg" alt="Logo" class="h-10 w-auto">
-
-                <span class="text-lg font-bold text-teal-600">
-                    Vision Mobility
-                </span>
-
+                <span class="text-lg font-bold text-teal-600">Vision Mobility</span>
             </div>
-
-            <button
-                id="closeMenu"
-                class="text-4xl font-bold text-gray-800">
-
-                ✕
-
-            </button>
-
+            <button id="closeMenu" class="text-3xl font-bold text-gray-800">✕</button>
         </div>
-
-        <div class="flex flex-col p-8 space-y-8 text-2xl font-semibold">
-
-            <a href="#">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#coverage">Coverage</a>
-            <a href="#booking">Book</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-
-            <button
-                id="mobileLoginBtn"
-                class="bg-teal-600 text-white py-4 rounded-2xl text-xl">
-
-                Login
-
-            </button>
-
+        <div class="flex flex-col p-8 space-y-6 text-xl font-semibold">
+            <a href="#" class="hover:text-teal-600 transition">Home</a>
+            <a href="#about" class="hover:text-teal-600 transition">About</a>
+            <a href="#services" class="hover:text-teal-600 transition">Services</a>
+            <a href="#coverage" class="hover:text-teal-600 transition">Coverage</a>
+            <a href="#booking" class="hover:text-teal-600 transition">Book</a>
+            <a href="#faq" class="hover:text-teal-600 transition">FAQ</a>
+            <a href="#contact" class="hover:text-teal-600 transition">Contact</a>
+            <button id="mobileLoginBtn" class="bg-teal-600 text-white py-4 rounded-2xl text-xl hover:bg-teal-700 transition">Login</button>
         </div>
-
     </nav>
 
-    <div
-        id="loginModal"
-        class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
-
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
         <div class="bg-white w-full max-w-md rounded-3xl p-8 relative">
-
-            <button
-                id="closeLoginModal"
-                class="absolute top-4 right-5 text-3xl">
-
-                ×
-
-            </button>
-
-            <h2 class="text-3xl font-bold mb-6 text-center">
-                Login
-            </h2>
-
+            <button id="closeLoginModal" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600">×</button>
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
             <form id="loginForm" class="space-y-5">
-
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    required
-                    class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required
-                    class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <button
-                    type="submit"
-                    class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition">
-
-                    Login
-
-                </button>
-
+                <input type="email" name="email" placeholder="Email Address" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="password" name="password" placeholder="Password" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition shadow-lg shadow-teal-600/30">Login</button>
             </form>
-
-            <p class="text-center text-gray-600 mt-6">
-
-                Don't have an account?
-
-                <button
-                    id="openSignup"
-                    class="text-teal-600 font-semibold">
-
-                    Signup
-
-                </button>
-
-            </p>
-
+            <p class="text-center text-gray-600 mt-6">Don't have an account? <button id="openSignup" class="text-teal-600 font-semibold hover:underline">Signup</button></p>
         </div>
-
     </div>
 
-    <div
-        id="signupModal"
-        class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
-
+    <!-- Signup Modal -->
+    <div id="signupModal" class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
         <div class="bg-white w-full max-w-md rounded-3xl p-8 relative">
-
-            <button
-                id="closeSignupModal"
-                class="absolute top-4 right-5 text-3xl">
-
-                ×
-
-            </button>
-
-            <h2 class="text-3xl font-bold mb-6 text-center">
-                Signup
-            </h2>
-
+            <button id="closeSignupModal" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600">×</button>
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Create Account</h2>
             <form id="signupForm" class="space-y-5">
-
-                <input
-                    type="text"
-                    name="fullname"
-                    placeholder="Full Name"
-                    required
-                    class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    required
-                    class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    required
-                    class="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <button
-                    type="submit"
-                    class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition">
-
-                    Create Account
-
-                </button>
-
+                <input type="text" name="fullname" placeholder="Full Name" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="email" name="email" placeholder="Email Address" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="password" name="password" placeholder="Password" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition shadow-lg shadow-teal-600/30">Create Account</button>
             </form>
-
         </div>
-
     </div>
 
-    <section class="pt-28 pb-20 bg-gradient-to-r from-teal-600 to-green-700 text-white text-center fade-up">
-
-        <div class="max-w-3xl mx-auto px-4">
-
-            <p class="mb-2 text-sm opacity-80">
-                Trusted by 10,000+ customers
-            </p>
-
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-                Accessible Mobility
-                <br>
-                Made Simple
-            </h1>
-
-            <p class="mb-8 text-lg opacity-90">
-                Pre-book rides, scooters and wheelchair services with ease.
-                Professional care. Reliable service. Dignified experience.
-            </p>
-
-            <a
-                href="#booking"
-                class="bg-white text-teal-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
-
-                Book Now
-
-            </a>
-
+    <!-- Hero Section -->
+    <section class="pt-28 pb-20 bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 text-white text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('./hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
+        <div class="max-w-3xl mx-auto px-4 relative z-10 fade-up">
+            <div class="flex justify-center gap-4 mb-6 flex-wrap">
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">✓ Licensed & Insured</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">✓ ADA Compliant</span>
+                <span class="bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">✓ 24/7 Available</span>
+            </div>
+            <p class="mb-2 text-sm opacity-90 font-medium tracking-wide uppercase">Trusted by 10,000+ customers</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">Accessible Mobility<br>Made Simple</h1>
+            <p class="mb-8 text-lg opacity-90 max-w-xl mx-auto">Pre-book rides, scooters and wheelchair services with ease. Professional care. Reliable service. Dignified experience.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#booking" class="bg-white text-teal-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg">Book Now</a>
+                <a href="tel:+16785982974" class="bg-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-amber-600 transition shadow-lg">Call Us</a>
+            </div>
         </div>
-
     </section>
 
-    <section id="about" class="py-20 fade-up">
-
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-
-            <div>
-
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    Compassionate Mobility Services
-                </h2>
-
-                <p class="text-gray-600 text-lg leading-relaxed">
-                    Vision Mobility provides safe, reliable, and accessible
-                    transportation solutions designed for individuals with
-                    mobility challenges.
-                </p>
-
-            </div>
-
-            <div>
-
-                <img
-                    src="./about-image.jpg"
-                    alt="About"
-                    class="rounded-3xl shadow-xl w-full object-cover">
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="services" class="py-20 bg-gray-50 fade-up">
-
-        <div class="max-w-7xl mx-auto px-4">
-
+    <!-- How It Works -->
+    <section class="py-20 bg-white fade-up">
+        <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-14">
-
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    Our Services
-                </h2>
-
-                <p class="text-gray-600 text-lg">
-                    Comprehensive mobility solutions designed for your needs.
-                </p>
-
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">How It Works</h2>
+                <p class="text-gray-600 text-lg">Book your mobility service in three simple steps</p>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                <div class="bg-white p-6 rounded-3xl shadow-md">
-
-                    <img
-                        src="./wheelchair.jpg"
-                        alt=""
-                        class="rounded-2xl mb-5 h-52 w-full object-cover">
-
-                    <h3 class="text-2xl font-bold mb-3">
-                        Wheelchair Transport
-                    </h3>
-
-                    <p class="text-gray-600">
-                        Safe and comfortable rides with trained assistance.
-                    </p>
-
-                </div>
-
-                <div class="bg-white p-6 rounded-3xl shadow-md">
-
-                    <img
-                        src="./scooter.jpg"
-                        alt=""
-                        class="rounded-2xl mb-5 h-52 w-full object-cover">
-
-                    <h3 class="text-2xl font-bold mb-3">
-                        Mobility Scooters
-                    </h3>
-
-                    <p class="text-gray-600">
-                        Reliable scooter rentals for temporary mobility needs.
-                    </p>
-
-                </div>
-
-                <div class="bg-white p-6 rounded-3xl shadow-md">
-
-                    <img
-                        src="./hire.jpg"
-                        alt=""
-                        class="rounded-2xl mb-5 h-52 w-full object-cover">
-
-                    <h3 class="text-2xl font-bold mb-3">
-                        Wheelchair Rentals
-                    </h3>
-
-                    <p class="text-gray-600">
-                        Manual wheelchairs available for short and long-term use.
-                    </p>
-
-                </div>
-
-                <div class="bg-white p-6 rounded-3xl shadow-md">
-
-                    <img
-                        src="./electric.jpg"
-                        alt=""
-                        class="rounded-2xl mb-5 h-52 w-full object-cover">
-
-                    <h3 class="text-2xl font-bold mb-3">
-                        Electric Wheelchairs
-                    </h3>
-
-                    <p class="text-gray-600">
-                        Advanced electric wheelchairs with premium comfort.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="coverage" class="py-20 fade-up">
-
-        <div class="max-w-7xl mx-auto px-4 text-center">
-
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                Service Coverage Areas
-            </h2>
-
-            <p class="text-gray-600 text-lg mb-14">
-                Reliable mobility support across major service areas.
-            </p>
-
             <div class="grid md:grid-cols-3 gap-8">
-
-                <div class="bg-white p-8 rounded-3xl shadow-md">
-                    <h3 class="text-2xl font-bold mb-3">Seattle</h3>
-                    <p class="text-gray-600">Wheelchair transportation support.</p>
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">📅</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">1. Book Online or Call</h3>
+                    <p class="text-gray-600">Choose your service, date, and time. Book in under 60 seconds through our simple form or give us a call.</p>
                 </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md">
-                    <h3 class="text-2xl font-bold mb-3">Tacoma</h3>
-                    <p class="text-gray-600">Reliable daily transportation services.</p>
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🚐</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">2. We Arrive on Time</h3>
+                    <p class="text-gray-600">Our trained driver arrives with a fully equipped, wheelchair-accessible vehicle at your pickup location.</p>
                 </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md">
-                    <h3 class="text-2xl font-bold mb-3">Bellevue</h3>
-                    <p class="text-gray-600">Accessible mobility transportation.</p>
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">♿</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">3. Ride in Comfort</h3>
+                    <p class="text-gray-600">Enjoy a safe, dignified journey with professional assistance from door to door.</p>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-    <section id="booking" class="py-20 bg-gray-100 fade-up">
-
-        <div class="max-w-4xl mx-auto px-4">
-
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">
-                Book Your Service
-            </h2>
-
-            <p class="text-center text-gray-600 mb-10">
-                Schedule your mobility service
-            </p>
-
-            <div
-                id="formMessage"
-                class="hidden mb-4 text-center p-4 rounded-xl text-white">
+    <!-- About Section -->
+    <section id="about" class="py-20 fade-up">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Compassionate Mobility Services</h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">Vision Mobility provides safe, reliable, and accessible transportation solutions designed for individuals with mobility challenges. Our trained staff ensures every journey is comfortable and dignified.</p>
+                <div class="flex gap-4 flex-wrap">
+                    <span class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg font-medium">Background-Checked Drivers</span>
+                    <span class="bg-amber-50 text-amber-700 px-4 py-2 rounded-lg font-medium">CPR Certified Staff</span>
+                    <span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-lg font-medium">Sensitivity Trained</span>
+                </div>
             </div>
+            <div>
+                <img src="./about-image.jpg" alt="About Vision Mobility" class="rounded-3xl shadow-2xl w-full object-cover h-96">
+            </div>
+        </div>
+    </section>
 
-            <form
-                id="bookingForm"
-                novalidate
-                class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+    <!-- Services Section (Competitor-Style Grid) -->
+    <section id="services" class="py-20 bg-gray-50 fade-up">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Our Services</h2>
+                <p class="text-gray-600 text-lg">Comprehensive mobility solutions designed for your needs</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card bg-white rounded-3xl shadow-md overflow-hidden group cursor-pointer">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./wheelchair.jpg" alt="Wheelchair Transport" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Wheelchair Transport</h3>
+                        <p class="text-gray-600 mb-4">Safe and comfortable rides with trained assistance. Our vehicles are fully equipped for all wheelchair types.</p>
+                        <span class="text-teal-600 font-semibold text-sm group-hover:underline">Learn More →</span>
+                    </div>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="service-card bg-white rounded-3xl shadow-md overflow-hidden group cursor-pointer">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./scooter.jpg" alt="Mobility Scooters" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Mobility Scooters</h3>
+                        <p class="text-gray-600 mb-4">Reliable scooter rentals for temporary mobility needs. Daily, weekly, and monthly rates available.</p>
+                        <span class="text-teal-600 font-semibold text-sm group-hover:underline">Learn More →</span>
+                    </div>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="service-card bg-white rounded-3xl shadow-md overflow-hidden group cursor-pointer">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./hire.jpg" alt="Wheelchair Rentals" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Wheelchair Rentals</h3>
+                        <p class="text-gray-600 mb-4">Manual wheelchairs available for short and long-term use. Lightweight and standard options in stock.</p>
+                        <span class="text-teal-600 font-semibold text-sm group-hover:underline">Learn More →</span>
+                    </div>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="service-card bg-white rounded-3xl shadow-md overflow-hidden group cursor-pointer">
+                    <div class="h-56 overflow-hidden">
+                        <img src="./electric.jpg" alt="Electric Wheelchairs" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Electric Wheelchairs</h3>
+                        <p class="text-gray-600 mb-4">Advanced electric wheelchairs with premium comfort. Joystick control and long battery life.</p>
+                        <span class="text-teal-600 font-semibold text-sm group-hover:underline">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <select
-                    name="serviceType"
-                    required
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+    <!-- Coverage Section -->
+    <section id="coverage" class="py-20 fade-up">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Service Coverage Areas</h2>
+            <p class="text-gray-600 text-lg mb-14">Reliable mobility support across major service areas</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-area-card bg-white p-8 rounded-3xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🏙️</div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Seattle</h3>
+                    <p class="text-gray-600">Full wheelchair transportation support across all Seattle neighborhoods including Capitol Hill, Ballard, and Downtown.</p>
+                </div>
+                <div class="service-area-card bg-white p-8 rounded-3xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🌲</div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Tacoma</h3>
+                    <p class="text-gray-600">Reliable daily transportation services throughout Tacoma and surrounding Pierce County areas.</p>
+                </div>
+                <div class="service-area-card bg-white p-8 rounded-3xl shadow-md border border-gray-100">
+                    <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🏔️</div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Bellevue</h3>
+                    <p class="text-gray-600">Accessible mobility transportation serving Bellevue, Redmond, and the Eastside communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-gray-100 fade-up">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-800">Book Your Service</h2>
+                <p class="text-center text-gray-600 mb-2">Schedule your mobility service in under 60 seconds</p>
+                <span class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-medium">Same-day bookings available</span>
+            </div>
+            <div id="formMessage" class="hidden mb-4 text-center p-4 rounded-xl text-white"></div>
+            <form id="bookingForm" novalidate class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+                <select name="serviceType" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
                     <option value="">Select Service Type</option>
-
                     <option>Wheelchair Transport</option>
                     <option>Mobility Scooter</option>
                     <option>Wheelchair Rental</option>
                     <option>Power Wheelchair</option>
-
                 </select>
-
                 <div class="grid md:grid-cols-2 gap-4">
-
-                    <input
-                        type="date"
-                        name="date"
-                        required
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                    <input
-                        type="time"
-                        name="time"
-                        required
-                        class="p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
+                    <input type="date" name="date" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                    <input type="time" name="time" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
                 </div>
-
-                <input
-                    type="text"
-                    name="pickup"
-                    placeholder="Pickup Location"
-                    required
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="text"
-                    name="dropoff"
-                    placeholder="Drop-off Location"
-                    required
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    required
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    required
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-
-                <textarea
-                    name="notes"
-                    placeholder="Additional Notes"
-                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                </textarea>
-
-                <button
-                    type="submit"
-                    class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-teal-700 transition">
-
-                    Confirm Booking
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
-
-    <section id="testimonials" class="py-20 fade-up">
-
-        <div class="max-w-7xl mx-auto px-4">
-
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-14">
-                What Clients Say
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-8">
-
-                <div class="bg-gray-50 p-8 rounded-3xl shadow-sm">
-
-                    <p class="text-gray-600 mb-6">
-                        “Professional and caring service.”
-                    </p>
-
-                    <h4 class="font-semibold">
-                        Sarah M.
-                    </h4>
-
-                </div>
-
-                <div class="bg-gray-50 p-8 rounded-3xl shadow-sm">
-
-                    <p class="text-gray-600 mb-6">
-                        “Excellent communication throughout.”
-                    </p>
-
-                    <h4 class="font-semibold">
-                        James R.
-                    </h4>
-
-                </div>
-
-                <div class="bg-gray-50 p-8 rounded-3xl shadow-sm">
-
-                    <p class="text-gray-600 mb-6">
-                        “Reliable and compassionate staff.”
-                    </p>
-
-                    <h4 class="font-semibold">
-                        Emily T.
-                    </h4>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="faq" class="py-20 bg-gray-50 fade-up">
-
-        <div class="max-w-4xl mx-auto px-4">
-
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-14">
-                Frequently Asked Questions
-            </h2>
-
-            <div class="space-y-6">
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-
-                    <h3 class="font-semibold text-lg mb-2">
-                        How do I schedule a ride?
-                    </h3>
-
-                    <p class="text-gray-600">
-                        You can schedule directly through our booking form.
-                    </p>
-
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm">
-
-                    <h3 class="font-semibold text-lg mb-2">
-                        Are vehicles wheelchair accessible?
-                    </h3>
-
-                    <p class="text-gray-600">
-                        Yes, all transportation services are accessibility-focused.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <section id="contact" class="py-20 text-center fade-up">
-
-        <div class="max-w-4xl mx-auto px-4">
-
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                Contact Us
-            </h2>
-
-            <p class="text-gray-600 mb-2">
-                +1 (678) 598-2974
-            </p>
-
-            <p class="text-gray-600 mb-2">
-                visionmobility@gmail.com
-            </p>
-
-            <p class="text-gray-600">
-                Available 24/7
-            </p>
-
-        </div>
-
-    </section>
-
-    <footer class="bg-gray-900 text-white py-16">
-
-        <div class="max-w-7xl mx-auto px-4 text-center">
-
-            <h3 class="text-3xl font-bold mb-4">
-                Vision Mobility
-            </h3>
-
-            <p class="text-gray-400 mb-8">
-                Compassionate and reliable mobility transportation services.
-            </p>
-
-            <p class="text-gray-500">
-                ©2026 Vision Mobility. All rights reserved.
-            </p>
-
-        </div>
-
-    </footer>
-
-    <script src="visionmobile.js"></script>
-
-</body>
-
-                    </html>
+                <input type="text" name="pickup" placeholder="Pickup Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="text" name="dropoff" placeholder="Drop-off Location" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition">
+                <textarea name="notes" placeholder="Additional Notes (optional)" class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition h-2
