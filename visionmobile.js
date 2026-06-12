@@ -69,13 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return fallback;
     }
 
+    // My Bookings Modal
     const myBookingsModal = document.createElement("div");
     myBookingsModal.id = "myBookingsModal";
     myBookingsModal.className = "hidden fixed inset-0 bg-black/50 z-[3000] flex items-start justify-center px-4 py-8 overflow-y-auto";
     myBookingsModal.innerHTML = `
-        <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative mt-10">
-            <button id="closeMyBookings" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600">×</button>
-            <h2 class="text-2xl font-bold mb-6 text-teal-600">My Bookings</h2>
+        <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative mt-10 shadow-2xl border border-gray-100">
+            <button id="closeMyBookings" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600 transition">×</button>
+            <h2 class="text-2xl font-bold mb-6 text-teal-600 border-b-2 border-teal-50 pb-3">My Bookings</h2>
             <div id="myBookingsContent"></div>
         </div>
     `;
@@ -90,15 +91,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const STATUS_STYLES = {
-        pending:   "bg-yellow-100 text-yellow-700",
-        confirmed: "bg-green-100 text-green-700",
-        cancelled: "bg-red-100 text-red-700"
+        pending:   "bg-yellow-100 text-yellow-700 border-yellow-200",
+        confirmed: "bg-green-100 text-green-700 border-green-200",
+        cancelled: "bg-red-100 text-red-700 border-red-200",
+        completed: "bg-blue-100 text-blue-700 border-blue-200"
     };
 
     async function openMyBookings() {
         myBookingsModal.classList.remove("hidden");
         const content = document.getElementById("myBookingsContent");
-        content.innerHTML = `<p class="text-center text-gray-400 py-8">Loading...</p>`;
+        content.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-12">
+                <div class="w-12 h-12 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin mb-4"></div>
+                <p class="text-gray-400">Loading your bookings...</p>
+            </div>
+        `;
 
         try {
             const token = localStorage.getItem("vm_token");
@@ -108,12 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const data  = await res.json();
 
             if (!res.ok) {
-                content.innerHTML = `<p class="text-center text-red-400 py-8">${getErrorMessage(data, "Failed to load bookings.")}</p>`;
+                content.innerHTML = `<p class="text-center text-red-500 py-8 bg-red-50 rounded-xl">${getErrorMessage(data, "Failed to load bookings.")}</p>`;
                 return;
             }
 
             if (!data.bookings || data.bookings.length === 0) {
-                content.innerHTML = `<p class="text-center text-gray-400 py-8">You have no bookings yet.</p>`;
+                content.innerHTML = `
+                    <div class="text-center py-12 bg-gray-50 rounded-xl">
+                        <p class="text-4xl mb-3">📋</p>
+                        <p class="text-gray-500 font-medium">You have no bookings yet.</p>
+                        <a href="#booking" onclick="document.getElementById('myBookingsModal').classList.add('hidden')" class="inline-block mt-4 text-teal-600 font-semibold hover:underline">Make your first booking →</a>
+                    </div>
+                `;
                 return;
             }
 
@@ -124,32 +137,34 @@ document.addEventListener("DOMContentLoaded", () => {
                     year: "numeric", month: "short", day: "numeric"
                 });
                 return `
-                    <div class="border border-gray-100 rounded-2xl p-4 mb-4 shadow-sm">
+                    <div class="border border-gray-200 rounded-2xl p-5 mb-4 shadow-sm hover:shadow-md transition bg-white">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <p class="font-bold text-gray-800">${b.serviceType}</p>
-                                <p class="text-sm text-gray-400">${bookedOn}</p>
+                                <p class="font-bold text-gray-800 text-lg">${b.serviceType}</p>
+                                <p class="text-sm text-gray-400">Booked on ${bookedOn}</p>
                             </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold ${style}">${label}</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold border ${style}">${label}</span>
                         </div>
-                        <div class="text-sm text-gray-600 space-y-1">
-                            <p>📅 ${b.date} at ${b.time}</p>
-                            <p>🟢 From: ${b.pickup}</p>
-                            <p>🔴 To: ${b.dropoff}</p>
-                            ${b.notes ? `<p>📝 ${b.notes}</p>` : ""}
+                        <div class="text-sm text-gray-600 space-y-2 bg-gray-50 p-3 rounded-xl">
+                            <p class="flex items-center gap-2">📅 <span class="font-medium">${b.date}</span> at <span class="font-medium">${b.time}</span></p>
+                            <p class="flex items-center gap-2">🟢 <span>From: ${b.pickup}</span></p>
+                            <p class="flex items-center gap-2">🔴 <span>To: ${b.dropoff}</span></p>
+                            ${b.notes ? `<p class="flex items-center gap-2">📝 <span class="italic">${b.notes}</span></p>` : ""}
                         </div>
                     </div>
                 `;
             }).join("");
 
         } catch {
-            content.innerHTML = `<p class="text-center text-red-400 py-8">Network error. Please try again.</p>`;
+            content.innerHTML = `<p class="text-center text-red-500 py-8 bg-red-50 rounded-xl">Network error. Please try again.</p>`;
         }
     }
 
+    // Mobile welcome in header
     function setLoggedInUI(user) {
         const firstName = user.fullname ? user.fullname.split(" ")[0] : "User";
 
+        // Desktop dropdown (unchanged behavior)
         const existingDesktop = document.getElementById("desktopLoginBtn") || document.getElementById("desktopUserMenu");
         if (existingDesktop) {
             const wrapper = document.createElement("div");
@@ -161,8 +176,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="text-xs">▾</span>
                 </button>
                 <div id="desktopDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50">
-                    <button id="desktopMyBookings" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 font-medium">My Bookings</button>
-                    <button id="desktopLogout" class="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-medium border-t border-gray-100">Logout</button>
+                    <button id="desktopMyBookings" class="w-full text-left px-4 py-3 text-sm text-teal-700 hover:bg-teal-50 font-medium transition flex items-center gap-2">
+                        <span>📋</span> My Bookings
+                    </button>
+                    <button id="desktopLogout" class="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 font-medium border-t border-gray-100 transition flex items-center gap-2">
+                        <span>🚪</span> Logout
+                    </button>
                 </div>
             `;
             existingDesktop.replaceWith(wrapper);
@@ -182,21 +201,32 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // Mobile: Welcome message in header between logo and hamburger
+        const mobileWelcomeHeader = document.getElementById("mobileWelcomeHeader");
+        if (mobileWelcomeHeader) {
+            mobileWelcomeHeader.textContent = `Hi, ${firstName}`;
+            mobileWelcomeHeader.classList.remove("hidden");
+        }
+
+        // Mobile menu: Replace login button with welcome text
         const existingMobile = document.getElementById("mobileLoginBtn") || document.getElementById("mobileWelcome");
         if (existingMobile) {
             const welcomeEl = document.createElement("p");
             welcomeEl.id = "mobileWelcome";
-            welcomeEl.className = "text-teal-600 font-semibold text-2xl";
-            welcomeEl.textContent = `Welcome, ${firstName}`;
+            welcomeEl.className = "text-teal-600 font-semibold text-xl border-b border-gray-100 pb-4";
+            welcomeEl.textContent = `Welcome back, ${firstName}!`;
             existingMobile.replaceWith(welcomeEl);
         }
 
+        // Add My Bookings and Logout to mobile menu
         const existingMyBtn = document.getElementById("mobileMyBookingsBtn");
         if (!existingMyBtn) {
+            const mobileMenuInner = mobileMenu.querySelector(".flex.flex-col");
+
             const myBookingsBtn = document.createElement("button");
             myBookingsBtn.id = "mobileMyBookingsBtn";
-            myBookingsBtn.className = "text-left text-2xl font-semibold text-gray-700 w-full";
-            myBookingsBtn.textContent = "My Bookings";
+            myBookingsBtn.className = "text-left text-xl font-semibold text-teal-700 w-full py-3 hover:bg-teal-50 rounded-lg transition flex items-center gap-2 px-2";
+            myBookingsBtn.innerHTML = `<span>📋</span> My Bookings`;
             myBookingsBtn.addEventListener("click", () => {
                 mobileMenu.classList.add("hidden");
                 menuBtn.classList.remove("hidden");
@@ -205,17 +235,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const logoutBtn = document.createElement("button");
             logoutBtn.id = "mobileLogoutBtn";
-            logoutBtn.className = "bg-red-500 text-white py-4 rounded-2xl text-xl w-full";
-            logoutBtn.textContent = "Logout";
+            logoutBtn.className = "bg-red-500 text-white py-3 rounded-2xl text-xl w-full hover:bg-red-600 transition shadow-lg flex items-center justify-center gap-2";
+            logoutBtn.innerHTML = `<span>🚪</span> Logout`;
             logoutBtn.addEventListener("click", logout);
 
-            const mobileMenuInner = mobileMenu.querySelector(".flex.flex-col");
             mobileMenuInner.appendChild(myBookingsBtn);
             mobileMenuInner.appendChild(logoutBtn);
         }
     }
 
     function setLoggedOutUI() {
+        // Desktop
         const desktopMenu = document.getElementById("desktopUserMenu");
         if (desktopMenu) {
             const btn = document.createElement("button");
@@ -226,11 +256,19 @@ document.addEventListener("DOMContentLoaded", () => {
             desktopMenu.replaceWith(btn);
         }
 
+        // Mobile header welcome
+        const mobileWelcomeHeader = document.getElementById("mobileWelcomeHeader");
+        if (mobileWelcomeHeader) {
+            mobileWelcomeHeader.textContent = "";
+            mobileWelcomeHeader.classList.add("hidden");
+        }
+
+        // Mobile menu
         const mobileWelcome = document.getElementById("mobileWelcome");
         if (mobileWelcome) {
             const btn = document.createElement("button");
             btn.id = "mobileLoginBtn";
-            btn.className = "bg-teal-600 text-white py-4 rounded-2xl text-xl w-full";
+            btn.className = "bg-teal-600 text-white py-4 rounded-2xl text-xl w-full hover:bg-teal-700 transition";
             btn.textContent = "Login";
             btn.addEventListener("click", openLoginModal);
             mobileWelcome.replaceWith(btn);
@@ -272,6 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     checkAuthState();
 
+    // Login Form
     const loginForm = document.getElementById("loginForm");
 
     loginForm.addEventListener("submit", async (e) => {
@@ -284,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const btn = loginForm.querySelector("button");
+        const originalText = btn.textContent;
         btn.textContent = "Logging in...";
         btn.disabled = true;
 
@@ -308,11 +348,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch {
             alert("Network error. Please check your connection and try again.");
         } finally {
-            btn.textContent = "Login";
+            btn.textContent = originalText;
             btn.disabled = false;
         }
     });
 
+    // Signup Form
     const signupForm = document.getElementById("signupForm");
 
     signupForm.addEventListener("submit", async (e) => {
@@ -326,6 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const btn = signupForm.querySelector("button");
+        const originalText = btn.textContent;
         btn.textContent = "Creating account...";
         btn.disabled = true;
 
@@ -350,11 +392,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch {
             alert("Network error. Please check your connection and try again.");
         } finally {
-            btn.textContent = "Create Account";
+            btn.textContent = originalText;
             btn.disabled = false;
         }
     });
 
+    // Booking Form
     const form       = document.getElementById("bookingForm");
     const messageBox = document.getElementById("formMessage");
 
@@ -364,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showMessage(text, isSuccess) {
         messageBox.textContent = text;
-        messageBox.className = `mb-4 text-center p-4 rounded-xl text-white ${
+        messageBox.className = `mb-4 text-center p-4 rounded-xl text-white font-medium ${
             isSuccess ? "bg-green-500" : "bg-red-500"
         }`;
         messageBox.classList.remove("hidden");
@@ -413,6 +456,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const button = form.querySelector("button");
+        const originalText = button.textContent;
         button.textContent = "Submitting...";
         button.disabled = true;
 
@@ -433,25 +477,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            showMessage("Booking submitted successfully! We will contact you shortly to confirm.", true);
+            showMessage("✅ Booking submitted successfully! We will contact you shortly to confirm.", true);
             form.reset();
 
         } catch {
-            showMessage("Network error. Please check your connection and try again.", false);
-        } finally {
-            button.textContent = "Confirm Booking";
-            button.disabled = false;
-        }
-    });
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add("show");
-        });
-    });
-
-    document.querySelectorAll(".fade-up").forEach(section => {
-        observer.observe(section);
-    });
-
-});
+ 
