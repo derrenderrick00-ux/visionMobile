@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Mobility Services | Accessible Transportation & Equipment Rentals – Seattle WA</title>
+    <meta name="description" content="Vision Mobility Services provides accessible transportation, wheelchair rentals, mobility scooters, Hoyer lifts, hospital beds and more across Seattle, Tacoma, Bellevue and surrounding Washington areas. Available 24/7.">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="visionmobile.css">
+</head>
+<body class="bg-white">
+
+<a href="tel:+16785982974" id="stickyCallBtn" class="md:hidden fixed bottom-6 right-6 z-[4000] bg-amber-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:bg-amber-600 transition">
+    📞
+</a>
+
+<header class="bg-white shadow-md fixed w-full top-0 z-[1000]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+        <div class="flex items-center space-x-3">
+            <img src="./logo.jpg" alt="Vision Mobility Services Logo" class="h-10 w-auto">
+            <span class="text-lg font-bold text-teal-600 hidden sm:block">Vision Mobility Services</span>
+        </div>
+        <div id="mobileHeaderArea" class="md:hidden flex-1 flex justify-center items-center px-2">
+            <span id="mobileWelcomeHeader" class="hidden text-teal-600 font-semibold text-sm truncate"></span>
+        </div>
+        <nav class="hidden md:flex items-center space-x-6 font-medium text-sm">
+            <a href="#" class="hover:text-teal-600 transition">Home</a>
+            <a href="#about" class="hover:text-teal-600 transition">About</a>
+            <a href="./products.html" class="hover:text-teal-600 transition">Equipment</a>
+            <a href="#coverage" class="hover:text-teal-600 transition">Coverage</a>
+            <a href="#booking" class="hover:text-teal-600 transition">Book</a>
+            <a href="#faq" class="hover:text-teal-600 transition">FAQ</a>
+            <a href="#contact" class="hover:text-teal-600 transition">Contact</a>
+            <button id="desktopLoginBtn" class="bg-teal-600 text-white px-5 py-2 rounded-xl hover:bg-teal-700 transition">Login</button>
+        </nav>
+        <button id="menuBtn" class="md:hidden text-3xl font-bold text-gray-800 ml-2">☰</button>
+    </div>
+</header>
+
+<nav id="mobileMenu" class="hidden fixed inset-0 bg-white z-[2000] md:hidden">
+    <div class="flex items-center justify-between p-4 border-b">
+        <div class="flex items-center space-x-3">
+            <img src="./logo.jpg" alt="Logo" class="h-10 w-auto">
+            <span class="text-lg font-bold text-teal-600">Vision Mobility Services</span>
+        </div>
+        <button id="closeMenu" class="text-3xl font-bold text-gray-800">✕</button>
+    </div>
+    <div class="flex flex-col p-8 space-y-6 text-xl font-semibold">
+        <a href="#" class="hover:text-teal-600 transition">Home</a>
+        <a href="#about" class="hover:text-teal-600 transition">About</a>
+        <a href="./products.html" class="hover:text-teal-600 transition">Equipment</a>
+        <a href="#coverage" class="hover:text-teal-600 transition">Coverage</a>
+        <a href="#booking" class="hover:text-teal-600 transition">Book</a>
+        <a href="#faq" class="hover:text-teal-600 transition">FAQ</a>
+        <a href="#contact" class="hover:text-teal-600 transition">Contact</a>
+        <button id="mobileLoginBtn" class="bg-teal-600 text-white py-4 rounded-2xl text-xl hover:bg-teal-700 transition">Login</button>
+    </div>
+</nav>
+
+<div id="loginModal" class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
+    <div class="bg-white w-full max-w-md rounded-3xl p-8 relative">
+        <button id="closeLoginModal" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600">×</button>
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Welcome Back</h2>
+        <form id="loginForm" class="space-y-5">
+            <input type="email" name="email" placeholder="Email Address" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="password" name="password" placeholder="Password" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition">Login</button>
+        </form>
+        <p class="text-center text-gray-600 mt-6">Don't have an account? <button id="openSignup" class="text-teal-600 font-semibold hover:underline">Signup</button></p>
+    </div>
+</div>
+
+<div id="signupModal" class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-center justify-center px-4">
+    <div class="bg-white w-full max-w-md rounded-3xl p-8 relative">
+        <button id="closeSignupModal" class="absolute top-4 right-5 text-3xl text-gray-400 hover:text-gray-600">×</button>
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Create Account</h2>
+        <form id="signupForm" class="space-y-5">
+            <input type="text" name="fullname" placeholder="Full Name" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="email" name="email" placeholder="Email Address" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="password" name="password" placeholder="Password (min 8 characters)" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Re-enter Password" required class="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700 transition">Create Account</button>
+        </form>
+    </div>
+</div>
+
+<!-- Hero -->
+<section class="pt-28 pb-20 bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="flex justify-center gap-3 mb-6 flex-wrap">
+            <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">✓ Licensed & Insured</span>
+            <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">✓ ADA Compliant</span>
+            <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-medium">✓ Available 24/7</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">Vision Mobility Services</h1>
+        <p class="mb-8 text-base md:text-lg opacity-90 max-w-3xl mx-auto leading-relaxed">
+            Vision Mobility Services provides safe, reliable, and accessible transportation solutions alongside premium mobility equipment rentals designed for individuals with mobility challenges. Operating 24/7 across Seattle and surrounding cities, our trained, compassionate staff ensures every journey is comfortable and dignified. Whether you need a wheelchair-accessible van, power scooters, power wheelchairs, manual wheelchairs, walkers & rollators, knee scooters, baby strollers, Hoyer lifts, or hospital beds & equipment — we are here to support your independence around the clock.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#booking" class="bg-white text-teal-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">Book Now</a>
+            <a href="./products.html" class="bg-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-amber-600 transition">View Equipment</a>
+            <a href="tel:+16785982974" class="bg-white/20 text-white px-8 py-3 rounded-xl font-semibold hover:bg-white/30 transition border border-white/30">Call Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">How It Works</h2>
+            <p class="text-gray-600 text-lg">Book your mobility service in three simple steps</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-6">
+                <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">📅</div>
+                <h3 class="text-xl font-bold mb-2 text-gray-800">1. Book Online or Call</h3>
+                <p class="text-gray-600">Choose your service, date, and time. Book in under 60 seconds through our simple form or call us anytime.</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🚐</div>
+                <h3 class="text-xl font-bold mb-2 text-gray-800">2. We Arrive or Deliver</h3>
+                <p class="text-gray-600">We transport you in our accessible van, or deliver equipment directly to your door — anywhere in our service area.</p>
+            </div>
+            <div class="text-center p-6">
+                <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">♿</div>
+                <h3 class="text-xl font-bold mb-2 text-gray-800">3. Ride or Rent with Ease</h3>
+                <p class="text-gray-600">Enjoy safe, dignified transportation or flexible equipment rentals — daily, weekly, or monthly — tailored to your needs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-20 fade-up">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Vision Mobility Services</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-4">Vision Mobility Services is a trusted provider of transportation services and equipment rentals across Seattle and surrounding cities in Washington and beyond. We offer reliable, affordable, and convenient mobility solutions with flexible rental options and delivery services for individuals, businesses, and visitors.</p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">Our mission is to make mobility simple and accessible by providing quality equipment and dependable service wherever our customers need it.</p>
+            <p class="text-teal-700 font-bold text-lg mb-6">Reliable Mobility. Flexible Rentals. Seamless Service.</p>
+            <div class="flex gap-3 flex-wrap">
+                <span class="bg-teal-50 text-teal-700 px-4 py-2 rounded-lg font-medium text-sm">Background-Checked Drivers</span>
+                <span class="bg-amber-50 text-amber-700 px-4 py-2 rounded-lg font-medium text-sm">CPR Certified Staff</span>
+                <span class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-lg font-medium text-sm">Sensitivity Trained</span>
+                <span class="bg-purple-50 text-purple-700 px-4 py-2 rounded-lg font-medium text-sm">24/7 Available</span>
+            </div>
+        </div>
+        <div>
+            <img src="./about-image.jpg" alt="About Vision Mobility Services" class="rounded-3xl shadow-2xl w-full object-cover h-96">
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-20 bg-teal-600 text-white fade-up">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Why Choose Vision Mobility Services?</h2>
+            <p class="text-white/80 text-lg">We go where others don't — 24/7, door to door</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-4xl mb-4">🕐</div>
+                <h3 class="font-bold text-lg mb-2">24/7 Availability</h3>
+                <p class="text-white/80 text-sm">We operate every day including weekends and holidays. Competitors close at 6PM — we never do.</p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-4xl mb-4">📱</div>
+                <h3 class="font-bold text-lg mb-2">Book Instantly Online</h3>
+                <p class="text-white/80 text-sm">No phone calls required. Book in under 60 seconds and get confirmation — anytime, anywhere.</p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-4xl mb-4">🚚</div>
+                <h3 class="font-bold text-lg mb-2">Delivery Service</h3>
+                <p class="text-white/80 text-sm">We deliver equipment directly to your home, hospital, or hotel. No showroom visit needed.</p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+                <div class="text-4xl mb-4">💰</div>
+                <h3 class="font-bold text-lg mb-2">Flexible Rentals</h3>
+                <p class="text-white/80 text-sm">Daily, weekly, and monthly rental options to fit your budget — no long-term commitments.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Equipment Preview -->
+<section id="services" class="py-20 bg-gray-50 fade-up">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Our Equipment & Services</h2>
+            <p class="text-gray-600 text-lg">Transportation and rental solutions for every mobility need</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+            <a href="./products.html#transport" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">🚐</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Accessible Van Transport</h3>
+            </a>
+            <a href="./products.html#scooters" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">🛵</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Mobility Scooters</h3>
+            </a>
+            <a href="./products.html#power" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">⚡</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Power Wheelchairs</h3>
+            </a>
+            <a href="./products.html#manual" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">♿</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Manual Wheelchairs</h3>
+            </a>
+            <a href="./products.html#hoyer" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">🏥</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Hoyer Lifts</h3>
+            </a>
+            <a href="./products.html#strollers" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">👶</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Baby Strollers</h3>
+            </a>
+            <a href="./products.html#beds" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md hover:-translate-y-1 transition group">
+                <div class="text-4xl mb-3">🛏️</div>
+                <h3 class="font-bold text-gray-800 text-sm group-hover:text-teal-600 transition">Transport Beds</h3>
+            </a>
+            <a href="./products.html" class="bg-teal-600 rounded-2xl p-5 text-center hover:bg-teal-700 transition group">
+                <div class="text-4xl mb-3">➕</div>
+                <h3 class="font-bold text-white text-sm">View All Equipment</h3>
+            </a>
+        </div>
+        <div class="text-center">
+            <a href="./products.html" class="inline-block bg-teal-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-teal-700 transition">
+                Browse All Equipment & Services →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Coverage -->
+<section id="coverage" class="fade-up">
+    <!-- Seattle Hero Background -->
+    <div class="relative h-80 md:h-96 overflow-hidden flex items-center justify-center"
+         style="background: linear-gradient(135deg, #0f766e 0%, #065f46 100%);">
+        <!-- Replace ./seattle-bg.jpg with a Seattle skyline photo when available -->
+        <img src="./seattle-bg.jpg" alt="Seattle Skyline"
+             class="absolute inset-0 w-full h-full object-cover opacity-30"
+             onerror="this.style.display='none'">
+        <div class="relative text-center text-white px-4 z-10">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-4">Seattle & Beyond</h2>
+            <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto">Transportation and equipment delivery across Washington State and surrounding areas</p>
+        </div>
+    </div>
+
+    <!-- Regions Grid -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            <p class="text-center text-gray-500 text-sm mb-8 uppercase tracking-wide font-medium">Areas We Serve</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🏙️</div>
+                    <p class="font-semibold text-gray-800 text-sm">Seattle</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🌲</div>
+                    <p class="font-semibold text-gray-800 text-sm">Tacoma</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🏔️</div>
+                    <p class="font-semibold text-gray-800 text-sm">Bellevue</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🌉</div>
+                    <p class="font-semibold text-gray-800 text-sm">Renton</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🌿</div>
+                    <p class="font-semibold text-gray-800 text-sm">Kirkland</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🏘️</div>
+                    <p class="font-semibold text-gray-800 text-sm">Redmond</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🌊</div>
+                    <p class="font-semibold text-gray-800 text-sm">Everett</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
+                    <div class="text-2xl mb-1">🗺️</div>
+                    <p class="font-semibold text-gray-800 text-sm">Bothell</p>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 text-sm">
+                Not on the list? <a href="tel:+16785982974" class="text-teal-600 font-semibold hover:underline">Call us</a> — we serve Washington State and beyond. We'll find a way to help.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Booking -->
+<section id="booking" class="py-20 bg-gray-100 fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-2 text-gray-800">Book Your Service</h2>
+            <p class="text-center text-gray-600 mb-2">Schedule your mobility service in under 60 seconds</p>
+            <span class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-medium">Same-day bookings available · 24/7</span>
+        </div>
+        <div id="formMessage" class="hidden mb-4 text-center p-4 rounded-xl text-white"></div>
+        <form id="bookingForm" novalidate class="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+            <select name="serviceType" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <option value="">Select Service Type</option>
+                <option>Wheelchair Transport</option>
+                <option>Mobility Scooter</option>
+                <option>Wheelchair Rental</option>
+                <option>Power Wheelchair</option>
+                <option>Hoyer Lift Rental</option>
+                <option>Baby Stroller Rental</option>
+                <option>Transport Bed Rental</option>
+                <option>Walker / Rollator Rental</option>
+                <option>Knee Scooter Rental</option>
+                <option>Hospital Bed Rental</option>
+            </select>
+            <div class="grid md:grid-cols-2 gap-4">
+                <input type="date" name="date" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                <input type="time" name="time" required class="p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+            </div>
+            <input type="text" name="pickup" placeholder="Pickup / Delivery Address" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="text" name="dropoff" placeholder="Drop-off Location (for transport)" class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <textarea name="notes" placeholder="Additional Notes (optional — e.g. rental duration, special requirements)" class="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 h-24 resize-none"></textarea>
+            <button type="submit" class="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-teal-700 transition">Confirm Booking</button>
+        </form>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="py-20 fade-up">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">What Clients Say</h2>
+        <p class="text-center text-gray-600 mb-14">Rated 4.9/5 from 200+ reviews</p>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-gray-600 mb-6 italic">"Professional and caring service. The driver was patient and helped my mother into the vehicle with such kindness. We will definitely book again."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center font-bold text-teal-700">S</div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Sarah M.</h4>
+                        <p class="text-sm text-gray-400">Seattle, WA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-gray-600 mb-6 italic">"Excellent communication throughout the entire process. They confirmed my booking quickly and arrived exactly on time. Highly recommend."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center font-bold text-amber-700">J</div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">James R.</h4>
+                        <p class="text-sm text-gray-400">Tacoma, WA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100">
+                <div class="flex text-amber-400 mb-4 text-lg">★★★★★</div>
+                <p class="text-gray-600 mb-6 italic">"Reliable and compassionate staff. My father has been using Vision Mobility Services for 6 months and every single ride has been smooth and stress-free."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center font-bold text-emerald-700">E</div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">Emily T.</h4>
+                        <p class="text-sm text-gray-400">Bellevue, WA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 bg-gray-50 fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">Frequently Asked Questions</h2>
+        <p class="text-center text-gray-600 mb-14">Everything you need to know before booking</p>
+        <div class="space-y-4">
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">How do I schedule a ride or equipment rental?</h3>
+                <p class="text-gray-600">Book directly through our online form above, or call us at +1 (678) 598-2974. Same-day bookings available 24/7.</p>
+            </div>
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">Do you deliver equipment to my location?</h3>
+                <p class="text-gray-600">Yes. We deliver wheelchairs, scooters, Hoyer lifts, hospital beds, and all equipment directly to your home, hotel, or hospital anywhere in our service area.</p>
+            </div>
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">Are your vehicles wheelchair accessible?</h3>
+                <p class="text-gray-600">Yes. All transportation vehicles are fully ADA compliant with ramps, lifts, and secure tie-down systems for all wheelchair types.</p>
+            </div>
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">What rental periods are available?</h3>
+                <p class="text-gray-600">We offer daily, weekly, and monthly rental options for all equipment. We also offer flexible extensions — just contact us before your rental ends.</p>
+            </div>
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">Can I book for someone else?</h3>
+                <p class="text-gray-600">Absolutely. Caregivers and family members can book on behalf of a patient or loved one. Include the recipient's name and any special requirements in the notes field.</p>
+            </div>
+            <div class="faq-card bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="font-semibold text-lg mb-2 text-gray-800">Do you operate on weekends and holidays?</h3>
+                <p class="text-gray-600">Yes — 24 hours a day, 7 days a week, 365 days a year including all public holidays. Mobility needs don't follow a schedule, and neither do we.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-20 bg-gradient-to-br from-teal-600 to-emerald-700 text-white fade-up">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
+        <p class="text-white/80 text-lg mb-12">Available around the clock — reach out anytime.</p>
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                <div class="text-3xl mb-3">📞</div>
+                <h3 class="font-bold text-lg mb-1">Phone</h3>
+                <a href="tel:+16785982974" class="text-white/80 hover:text-white transition">+1 (678) 598-2974</a>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                <div class="text-3xl mb-3">✉️</div>
+                <h3 class="font-bold text-lg mb-1">Email</h3>
+                <a href="mailto:info@visionmobilityllc.com" class="text-white/80 hover:text-white transition text-sm">info@visionmobilityllc.com</a>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                <div class="text-3xl mb-3">🕐</div>
+                <h3 class="font-bold text-lg mb-1">Hours</h3>
+                <p class="text-white/80">Available 24/7</p>
+            </div>
+        </div>
+        <a href="#booking" class="inline-block bg-white text-teal-700 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition">
+            Book Your Service Now
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="./logo.jpg" alt="Vision Mobility Services" class="h-10 w-auto rounded-lg">
+                    <h3 class="text-lg font-bold text-teal-400">Vision Mobility Services</h3>
+                </div>
+                <p class="text-gray-400 leading-relaxed mb-4 text-sm">Reliable mobility. Flexible rentals. Seamless service — across Seattle and Washington State.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="bg-gray-800 hover:bg-teal-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition text-sm font-bold">f</a>
+                    <a href="#" class="bg-gray-800 hover:bg-teal-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition text-xs font-bold">in</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                <div class="space-y-2">
+                    <a href="#about" class="block text-gray-400 hover:text-teal-400 transition text-sm">About Us</a>
+                    <a href="./products.html" class="block text-gray-400 hover:text-teal-400 transition text-sm">Equipment & Services</a>
+                    <a href="#coverage" class="block text-gray-400 hover:text-teal-400 transition text-sm">Coverage Areas</a>
+                    <a href="#booking" class="block text-gray-400 hover:text-teal-400 transition text-sm">Book a Service</a>
+                    <a href="#faq" class="block text-gray-400 hover:text-teal-400 transition text-sm">FAQ</a>
+                    <a href="./privacy-policy.html" class="block text-gray-400 hover:text-teal-400 transition text-sm">Privacy Policy</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Contact</h4>
+                <div class="space-y-2">
+                    <a href="tel:+16785982974" class="block text-gray-400 hover:text-teal-400 transition text-sm">+1 (678) 598-2974</a>
+                    <a href="mailto:info@visionmobilityllc.com" class="block text-gray-400 hover:text-teal-400 transition text-sm">info@visionmobilityllc.com</a>
+                    <p class="text-gray-400 text-sm">Seattle · Tacoma · Bellevue · Renton</p>
+                    <p class="text-gray-400 text-sm">Washington State & Beyond</p>
+                    <p class="text-gray-400 text-sm">Available 24/7</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 text-sm">© 2026 Vision Mobility Services LLC. All rights reserved.</p>
+            <a href="./privacy-policy.html" class="text-gray-500 hover:text-teal-400 transition text-sm">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="visionmobile.js"></script>
+</body>
+</html>
